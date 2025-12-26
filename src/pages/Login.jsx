@@ -7,8 +7,8 @@ export default function Login() {
                 
                 
                 <div className="card card-boarder">
-                    <h2 className="text-center">Sign In To GymFlow</h2>
-                    <p className="text-center text-muted text-capitalize">enter your data to access the admin dashboard</p>
+                    <h2 className="text-center"> Login To GymFlow</h2>
+                    <p className="text-center text-muted text-capitalize">enter your data to access </p>
                     <form action="" method="post" className=''>
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label d-flex justify-content-between">Email</label>
@@ -41,7 +41,7 @@ export default function Login() {
                             </div>
                             <a href="/" className='link nav-link'>Forgot your password?</a>
                         </div>
-                        <button type='submit' className='btn  text-uppercase' id='submit-btn'>sign in</button>
+                        <button type='submit' className='btn  text-uppercase' id='submit-btn'>login</button>
 
                     </form>
                 </div>
