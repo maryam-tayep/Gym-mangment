@@ -14,11 +14,13 @@
     "aos": "^2.3.4",
     "axios": "^1.13.2",
     "bootstrap": "^5.3.8",
+    "formik": "^2.4.9",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^7.10.1",
-    "sweetalert2": "^11.26.4"
+    "sweetalert2": "^11.26.4",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
