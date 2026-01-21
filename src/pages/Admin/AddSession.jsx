@@ -11,7 +11,7 @@ export default function AddSession() {
     capacity:Yup.number().required("session capacity is required"),
     startTime: Yup.date().required("start time is required"),
     endTime: Yup.date().required("end time is required"),
-    description: Yup.string().required("Description is required"),
+    description: Yup.string().nullable("description can be nullable"),
   });
 
   return (
@@ -33,7 +33,7 @@ export default function AddSession() {
             validationSchema={validationSchema}
             onSubmit={(values) => {
               api
-                .post("http://localhost:8000/api/sessions/add", values)
+                .post("", values)
                 .then((res) => {console.log(res)
                 })
                 .catch((err) => console.log(err))

@@ -14,11 +14,15 @@ import EditPlan from "./pages/Admin/EditPlan";
 import Session from "./pages/Admin/Session";
 import AddSession from "./pages/Admin/AddSession";
 import EditSession from "./pages/Admin/EditSession";
+import Categories from "./pages/Admin/Categories";
+import AddCategories from "./pages/Admin/AddCategories";
+import EditCategories from "./pages/Admin/EditCategories";
 function App() {
   return (
     <>
     
       <Routes>
+        
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
@@ -34,9 +38,10 @@ function App() {
         <Route path="/sessions" element={<Session/>}/>
         <Route path="/sessions/add" element={<AddSession/>}/>
         <Route path="/sessions/edit" element={<EditSession/>}/>
+        <Route path="/category" element={<Categories/>}/>
+        <Route path="/category/add" element={<AddCategories/>}/>
+        <Route path="/category/edit" element={<EditCategories/>}/>
 
-
-        
       </Routes>
       
     </>

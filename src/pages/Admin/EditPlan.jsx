@@ -25,7 +25,8 @@ export default function EditPlan() {
     price: Yup.number()
       .positive("Price must be positive")
       .required("Price is required"),
-    status: Yup.string().required("Status is required"),
+    is_active: Yup.string().required("Status is required"),
+    duration_days: Yup.number().required("dary required"),
   });
 
   if (!plan) {
@@ -50,7 +51,8 @@ export default function EditPlan() {
               name: plan.name || "",
               description: plan.description || "",
               price: plan.price || "",
-              status: plan.status || "active",
+              is_active: plan.status || "active",
+              duration_days: plan.duration_days || "",
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
@@ -107,12 +109,28 @@ export default function EditPlan() {
                 {/* Status */}
                 <div className="mb-3">
                   <label className="form-label">Status</label>
-                  <Field as="select" name="status" className="form-select">
+                  <Field as="select" name="is_active" className="form-select">
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
                   </Field>
                   <ErrorMessage
                     name="status"
+                    component="small"
+                    className="text-danger"
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="duration_days" className="form-label">
+                    Duration Days
+                  </label>
+                  <Field
+                    as="number"
+                    name="duration_days"
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="duration_days"
                     component="small"
                     className="text-danger"
                   />

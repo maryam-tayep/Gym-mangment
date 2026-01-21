@@ -13,7 +13,8 @@ export default function AddPlan() {
     price: Yup.number()
       .positive("Price must be positive")
       .required("Price is required"),
-    status: Yup.string().required("Status is required"),
+    is_active: Yup.string().required("Status is required"),
+    duration_days: Yup.number().required("days is required")
   });
 
   return (
@@ -28,11 +29,12 @@ export default function AddPlan() {
               description: "",
               price: "",
               status: "active",
+              duration_days:"",
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
               api
-                .post("http://localhost:8000/api/plans/add", values)
+                .post("", values)
                 .then((res) => {
                   console.log(res);
                 })
@@ -91,13 +93,22 @@ export default function AddPlan() {
                   className="text-danger"
                 />
               </div>
+              <div className="mb-3">
+                <label htmlFor="duration_days" className="form-label">Duration Days</label>
+                <Field as="number" name="duration_days" className="form-control"/>
+                <ErrorMessage
+                  name="duration_days"
+                  component="small"
+                  className="text-danger"
+                />
+              </div>
 
               <button
                 type="submit"
-                disabled={isSubmitting}
+                
                 className="btn btn-primary"
               >
-               submit {isSubmitting ? "Saving..." : "Create Plan"}
+               submit 
               </button>
             </Form>
           </Formik>

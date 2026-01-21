@@ -20,7 +20,6 @@ export default function EditSession() {
   }, [id]);
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Plan name is required"),
     capacity: Yup.number().required("session capacity is required"),
     startTime: Yup.date().required("start time is required"),
     endTime: Yup.date().required("end time is required"),
@@ -46,7 +45,7 @@ export default function EditSession() {
           <Formik
             enableReinitialize
             initialValues={{
-              name: "",
+              capacity:"",
               startTime: "",
               endTime: "",
               description: "",
@@ -65,12 +64,12 @@ export default function EditSession() {
             {({ isSubmitting }) => (
               <Form>
                 <div className="mb-3">
-                  <label htmlFor="session name" className="form-label">
-                    Session Name
+                  <label htmlFor="capacity" className="form-label">
+                    Session Capacity
                   </label>
-                  <Field name="name" className="form-control" />
+                  <Field name="name" as="number" className="form-control" />
                   <ErrorMessage
-                    name="name"
+                    name="capacity"
                     component="small"
                     className="text-danger"
                   />

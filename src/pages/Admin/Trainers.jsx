@@ -12,95 +12,101 @@ export default function Trainers() {
       .then((response) => {
         setTrainers(response.data.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   }, []);
+
   const deleteTrainer = (id) => {
-    if (!window.confirm("are you sure you want to delete this trainer")) {
-      return;
-    }
+    if (!window.confirm("are you sure you want to delete this trainer")) return;
+
     api
       .delete(`/trainer/${id}`)
       .then(() => {
-        setTrainers(trainers.filter((trainers) => trainers.id !== id));
+        setTrainers(trainers.filter((t) => t.id !== id));
       })
       .catch((err) => console.log(err));
   };
 
   return (
-    <>
-      <AdminLayout
-      title={"trainer"}
-      text={"manage your gym trainers"}>
-        <div id="content">
-          <div className="page-content bg-light p-3">
-            {/* Header */}
-            <div className="header d-flex align-items-center justify-content-between mb-3">
-              <div>
-                <h2 className="text-capitalize"><i className=" fa-solid fa-person-running"></i>Trainers management</h2>
-                <p className="text-muted">manage and track all gym trainers</p>
-              </div>
+    <AdminLayout title="Trainers" text="manage your gym trainers">
+      <div className="page-content bg-light p-3 p-md-4">
 
-              <Link to="/trainers/add" className="btn btn-sm btn-primary">
-                Add new trainer
-              </Link>
-            </div>
+        {/* Header */}
+        <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3 mb-4">
+          <div>
+            <h2 className="text-capitalize mb-1">
+              <i className="fa-solid fa-person-running me-2"></i>
+              Trainers management
+            </h2>
+            <p className="text-muted mb-0">
+              manage and track all gym trainers
+            </p>
+          </div>
 
-            {/* Trainers Cards */}
-            {trainers.length > 0 ? (
-              <div className="row">
-                {trainers.map((trainer) => (
-                  <div className="col-md-4 mb-4" key={trainer.id}>
-                    <div className="card h-100 shadow-sm">
-                      <img
-                        src={trainer.img}
-                        className="card-img-top"
-                        alt="trainer"
-                        style={{ height: "220px", objectFit: "cover" }}
-                      />
+          <Link to="/trainers/add" className="btn btn-primary">
+            <i className="fa-solid fa-plus me-2"></i>
+            Add new trainer
+          </Link>
+        </div>
 
-                      <div className="card-body text-center">
-                        <h5 className="card-title">{trainer.name}</h5>
-                        <p className="text-muted">{trainer.hireDate}</p>
+        {/* Trainers Grid */}
+        {trainers.length > 0 ? (
+          <div className="row g-4">
+            {trainers.map((trainer) => (
+              <div
+                className="col-12 col-sm-6 col-lg-4"
+                key={trainer.id}
+              >
+                <div className="card h-100 shadow-sm border-0">
+                  <img
+                    src={trainer.img}
+                    className="card-img-top"
+                    alt="trainer"
+                    style={{ height: "220px", objectFit: "cover" }}
+                  />
 
-                        <div className="d-flex justify-content-between mt-3">
-                          <Link
-                            to={`/trainers/edit/${trainer.id}`}
-                            className="btn btn-sm btn-warning"
-                          >
-                            Edit
-                          </Link>
+                  <div className="card-body text-center d-flex flex-column">
+                    <h5 className="card-title mb-1">{trainer.name}</h5>
+                    <small className="text-muted mb-3">
+                      Joined: {trainer.hireDate}
+                    </small>
 
-                          <Link
-                            to={`/trainers/${trainer.id}`}
-                            className="btn btn-sm btn-primary"
-                          >
-                            View
-                          </Link>
-                          <button
-                            className="btn btn-danger btn-sm"
-                            onClick={() => deleteTrainer(trainer.id)}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </div>
+                    {/* Actions */}
+                    <div className="mt-auto d-flex flex-wrap justify-content-center gap-2">
+                      <Link
+                        to={`/trainers/edit/${trainer.id}`}
+                        className="btn btn-sm btn-outline-warning"
+                      >
+                        Edit
+                      </Link>
+
+                      <Link
+                        to={`/trainers/${trainer.id}`}
+                        className="btn btn-sm btn-outline-primary"
+                      >
+                        View
+                      </Link>
+
+                      <button
+                        className="btn btn-sm btn-outline-danger"
+                        onClick={() => deleteTrainer(trainer.id)}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
-                ))}
+                </div>
               </div>
-            ) : (
-              <div className="card text-center p-4">
-                <h4 className="text-muted mb-3">No trainers found</h4>
-                <Link to="/trainers/add" className="btn btn-primary">
-                  Add Trainer
-                </Link>
-              </div>
-            )}
+            ))}
           </div>
-        </div>
-      </AdminLayout>
-    </>
+        ) : (
+          <div className="card text-center p-4 shadow-sm">
+            <h4 className="text-muted mb-3">No trainers found</h4>
+            <Link to="/trainers/add" className="btn btn-primary">
+              Add Trainer
+            </Link>
+          </div>
+        )}
+      </div>
+    </AdminLayout>
   );
 }

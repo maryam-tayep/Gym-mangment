@@ -59,6 +59,8 @@ export default function AddMembers() {
               street: trainer.street || "",
               building_number: trainer.building_number || "",
               gender: trainer.gender || "",
+              specialties: trainer.specialties || "",
+              hire_date: trainer.hire_date || "",
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
@@ -149,6 +151,30 @@ export default function AddMembers() {
                   </div>
                   <ErrorMessage
                     name="gender"
+                    component="div"
+                    className="form-error text-danger"
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">Specialties</label>
+                  <Field name="specialties" className="form-control" />
+                  <ErrorMessage
+                    name="specialties"
+                    component="div"
+                    className="form-error text-danger"
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">Hire Date</label>
+                  <Field
+                    name="hire_date"
+                    type="date"
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="hire_date"
                     component="div"
                     className="form-error text-danger"
                   />

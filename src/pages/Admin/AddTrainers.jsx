@@ -17,18 +17,17 @@ export default function AddMembers() {
     street: Yup.string().required("Street is required"),
     building_number: Yup.string().required("Building number is required"),
     gender: Yup.string().required("Gender is required"),
+    specialties: Yup.string().required("specialties is required"),
+    hire_date: Yup.date().required("hire date is required"),
   });
 
   return (
-    <AdminLayout
-    title={"Add Trainer"}
-    text={"Add your trainers"}>
-      <div className="auth-container">
-        <div className="auth-card p-4">
-          <h2 className="text-center"></h2>
-          <p className="text-center text-muted mb-4">
+    <AdminLayout title={"Add Trainer"} text={"Add your trainers"}>
+      <div className="page-content ">
+        <div className="card">
+          <h4 className="text-center text-muted mb-4">
             Create a new Trainer account
-          </p>
+          </h4>
 
           <Formik
             initialValues={{
@@ -39,12 +38,13 @@ export default function AddMembers() {
               street: "",
               building_number: "",
               gender: "",
-             
+              specialties: "",
+              hire_date: "",
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
               api
-                .post("http://localhost:8000/api/trainers/add", values)
+                .post("", values)
                 .then((res) => console.log(res.data))
                 .catch((err) => console.log(err));
             }}
@@ -133,6 +133,27 @@ export default function AddMembers() {
                   className="form-error text-danger"
                 />
               </div>
+
+              <div className="mb-3">
+                <label className="form-label">Specialties</label>
+                <Field name="specialties" className="form-control" />
+                <ErrorMessage
+                  name="specialties"
+                  component="div"
+                  className="form-error text-danger"
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">Hire Date</label>
+                <Field name="hire_date" type="date" className="form-control" />
+                <ErrorMessage
+                  name="hire_date"
+                  component="div"
+                  className="form-error text-danger"
+                />
+              </div>
+
               <button
                 type="submit"
                 className="btn btn-primary w-100 submit-btn"

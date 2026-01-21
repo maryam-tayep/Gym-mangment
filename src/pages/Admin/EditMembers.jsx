@@ -28,6 +28,27 @@ export default function AddMembers() {
     street: Yup.string().required("Street is required"),
     building_number: Yup.string().required("Building number is required"),
     gender: Yup.string().required("Gender is required"),
+    height: Yup.number().required("hight is required"),
+    weight: Yup.number().required("weight is required"),
+    blood_type: Yup.string().required("blood type is required"),
+    note: Yup.string().nullable("note can be nullable"),
+    last_health_rec_update: Yup.date().nullable("can be nullable"),
+    join_date: Yup.date().required("join date is required"),
+    profile_image: Yup.mixed()
+      .nullable()
+      .test(
+        "fileSize",
+        "File size is too large",
+        (value) => !value || (value && value.size <= 2000000), 
+      )
+      .test(
+        "fileType",
+        "Unsupported file format",
+        (value) =>
+          !value ||
+          (value &&
+            ["image/jpeg", "image/png", "image/jpg"].includes(value.type)),
+      ),
   });
 
   if (!member) {
@@ -56,6 +77,13 @@ export default function AddMembers() {
               street: member.street || "",
               building_number: member.building_number || "",
               gender: member.gender || "",
+              height: member.height || "",
+              weight: member.weight || "",
+              blood_type: member.blood_type || "",
+              note: member.note || "",
+              last_health_rec_update: member.last_health_rec_update || "",
+              join_date: member.join_date || "",
+              profile_image: null || "",
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
@@ -150,6 +178,134 @@ export default function AddMembers() {
                     component="div"
                     className="form-error text-danger"
                   />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor=" height" className="form-label">
+                    Height
+                  </label>
+                  <Field type="number" className="form-control" name="height" />
+                  <ErrorMessage
+                    name="height"
+                    component="div"
+                    className="form-error text-danger"
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor=" weight" className="form-label">
+                    Weight
+                  </label>
+                  <Field type="number" className="form-control" name="weight" />
+                  <ErrorMessage
+                    name="weight"
+                    component="div"
+                    className="form-error text-danger"
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="blood_type" className="form-label">
+                    Blood Type
+                  </label>
+                  <Field
+                    type="text"
+                    className="form-control"
+                    name="blood_type"
+                  />
+                  <ErrorMessage
+                    name="blood_type"
+                    component="div"
+                    className="form-error text-danger"
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="note" className="form-label">
+                    Note
+                  </label>
+                  <Field
+                    as="textarea"
+                    rows="4"
+                    className="form-control"
+                    name="note"
+                  />
+                  <ErrorMessage
+                    name="note"
+                    component="div"
+                    className="form-error text-danger"
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label
+                    htmlFor="last_health_rec_update"
+                    className="form-label d-block"
+                  >
+                    last health record update
+                  </label>
+                  <Field
+                    type="date"
+                    className="form-control"
+                    name="last_health_rec_update"
+                  />
+                  <ErrorMessage
+                    name="last_health_rec_update"
+                    component="div"
+                    className="form-error text-danger"
+                  />
+                </div>
+
+                {/* join date*/}
+                <div className="mb-3">
+                  <label htmlFor="join_date" className="form-label d-block">
+                    Join Date
+                  </label>
+                  <Field
+                    type="date"
+                    className="form-control"
+                    name="join_date"
+                  />
+                  <ErrorMessage
+                    name="join_date"
+                    component="div"
+                    className="form-error text-danger"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Profile Image</label>
+                  <input
+                    type="file"
+                    name="profile_image"
+                    className="form-control"
+                    accept="image/*"
+                    onChange={(event) => {
+                      setFieldValue(
+                        "profile_image",
+                        event.currentTarget.files[0],
+                      );
+                      setPreview(
+                        URL.createObjectURL(event.currentTarget.files[0]),
+                      );
+                    }}
+                  />
+                  <ErrorMessage
+                    name="profile_image"
+                    component="div"
+                    className="form-error text-danger"
+                  />
+                  {preview && (
+                    <img
+                      src={preview}
+                      alt="preview"
+                      className="img-preview mt-2"
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        borderRadius: "10px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  )}
                 </div>
 
                 <button

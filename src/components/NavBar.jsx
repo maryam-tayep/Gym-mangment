@@ -1,22 +1,29 @@
-export default function NavBar({ title, text, user, email }) {
+export default function NavBar({ title, text, user = "Admin", email = "admin@gym.com" }) {
   return (
-    <nav className="navbar-admin d-flex align-items-center justify-content-between">
+    <nav className="navbar bg-white border-bottom px-3 py-2 d-flex justify-content-between align-items-center">
+      
+      {/* Left */}
       <div>
-        <h5 className="mb-0">{title}</h5>
+        <h5 className="mb-0 fw-bold text-capitalize">{title}</h5>
         <small className="text-muted">{text}</small>
       </div>
 
-      <div className="d-flex align-items-center gap-2">
-        <img
-          src="image/Starter pfp.jpg"
-          alt="user"
-          style={{ width: 40, height: 40, borderRadius: "50%" }}
-        />
-        <div>
-          <h6 className="mb-0">{user}</h6>
+      {/* Right */}
+      <div className="d-flex align-items-center gap-3">
+        <div className="text-end d-none d-md-block">
+          <h6 className="mb-0 fw-semibold">{user}</h6>
           <small className="text-muted">{email}</small>
         </div>
+
+        <img
+          src="/image/Starter pfp.jpg"
+          alt="user"
+          className="rounded-circle border"
+          style={{ width: 40, height: 40, objectFit: "cover" }}
+        />
       </div>
     </nav>
   );
 }
+
+
